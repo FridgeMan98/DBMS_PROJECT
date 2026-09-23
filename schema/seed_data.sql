@@ -22,27 +22,27 @@ INSERT INTO states (state_code, state_name, region) VALUES
 -- -----------------------------------------------------------
 -- CUSTOMERS (10)
 -- -----------------------------------------------------------
-INSERT INTO customers (first_name, last_name, email, phone, address_line, city, state_code, pincode) VALUES
-('Arjun',   'Sharma',    'arjun.sharma@email.com',    '9876543210', '12 MG Road',         'Mumbai',    'MH', '400001'),
-('Priya',   'Nair',      'priya.nair@email.com',      '9876543211', '45 Brigade Road',    'Bengaluru', 'KA', '560001'),
-('Rohit',   'Verma',     'rohit.verma@email.com',     '9876543212', '7 Connaught Place',  'Delhi',     'DL', '110001'),
-('Sneha',   'Pillai',    'sneha.pillai@email.com',    '9876543213', '23 Anna Salai',      'Chennai',   'TN', '600002'),
-('Amit',    'Das',       'amit.das@email.com',        '9876543214', '89 Park Street',     'Kolkata',   'WB', '700016'),
-('Kavya',   'Reddy',     'kavya.reddy@email.com',     '9876543215', '34 Banjara Hills',   'Hyderabad', 'AP', '500034'),
-('Vikram',  'Patel',     'vikram.patel@email.com',    '9876543216', '56 CG Road',         'Ahmedabad', 'GJ', '380006'),
-('Meera',   'Joshi',     'meera.joshi@email.com',     '9876543217', '78 MI Road',         'Jaipur',    'RJ', '302001'),
-('Suresh',  'Kumar',     'suresh.kumar@email.com',    '9876543218', '11 Hazratganj',      'Lucknow',   'UP', '226001'),
-('Divya',   'Singh',     'divya.singh@email.com',     '9876543219', '5 MP Nagar',         'Bhopal',    'MP', '462011');
+INSERT INTO customers (first_name, last_name, email, password_hash, phone, address_line, city, state_code, pincode) VALUES
+('Arjun',   'Sharma',    'arjun.sharma@email.com',    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543210', '12 MG Road',         'Mumbai',    'MH', '400001'),
+('Priya',   'Nair',      'priya.nair@email.com',      '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543211', '45 Brigade Road',    'Bengaluru', 'KA', '560001'),
+('Rohit',   'Verma',     'rohit.verma@email.com',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543212', '7 Connaught Place',  'Delhi',     'DL', '110001'),
+('Sneha',   'Pillai',    'sneha.pillai@email.com',    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543213', '23 Anna Salai',      'Chennai',   'TN', '600002'),
+('Amit',    'Das',       'amit.das@email.com',        '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543214', '89 Park Street',     'Kolkata',   'WB', '700016'),
+('Kavya',   'Reddy',     'kavya.reddy@email.com',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543215', '34 Banjara Hills',   'Hyderabad', 'AP', '500034'),
+('Vikram',  'Patel',     'vikram.patel@email.com',    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543216', '56 CG Road',         'Ahmedabad', 'GJ', '380006'),
+('Meera',   'Joshi',     'meera.joshi@email.com',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543217', '78 MI Road',         'Jaipur',    'RJ', '302001'),
+('Suresh',  'Kumar',     'suresh.kumar@email.com',    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543218', '11 Hazratganj',      'Lucknow',   'UP', '226001'),
+('Divya',   'Singh',     'divya.singh@email.com',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9876543219', '5 MP Nagar',         'Bhopal',    'MP', '462011');
 
 -- -----------------------------------------------------------
 -- SELLERS (5)
 -- -----------------------------------------------------------
-INSERT INTO sellers (business_name, contact_email, contact_phone, address_line, city, state_code, pincode, rating) VALUES
-('TechMart India',      'contact@techmart.in',      '9000000001', 'Plot 12, MIDC',       'Pune',      'MH', '411018', 4.5),
-('FashionHub',          'support@fashionhub.in',    '9000000002', '45 Garment District', 'Surat',     'GJ', '395003', 4.2),
-('HomeEssentials',      'info@homeessentials.in',   '9000000003', '7 Industrial Area',   'Delhi',     'DL', '110020', 4.0),
-('BookWorld',           'sales@bookworld.in',       '9000000004', '23 College Street',   'Kolkata',   'WB', '700073', 4.8),
-('SportZone',           'help@sportzone.in',        '9000000005', '56 Koramangala',      'Bengaluru', 'KA', '560034', 4.3);
+INSERT INTO sellers (business_name, contact_email, password_hash, contact_phone, address_line, city, state_code, pincode, rating) VALUES
+('TechMart India',      'contact@techmart.in',      '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9000000001', 'Plot 12, MIDC',       'Pune',      'MH', '411018', 4.5),
+('FashionHub',          'support@fashionhub.in',    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9000000002', '45 Garment District', 'Surat',     'GJ', '395003', 4.2),
+('HomeEssentials',      'info@homeessentials.in',   '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9000000003', '7 Industrial Area',   'Delhi',     'DL', '110020', 4.0),
+('BookWorld',           'sales@bookworld.in',       '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9000000004', '23 College Street',   'Kolkata',   'WB', '700073', 4.8),
+('SportZone',           'help@sportzone.in',        '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjIQqiRQYq', '9000000005', '56 Koramangala',      'Bengaluru', 'KA', '560034', 4.3);
 
 -- -----------------------------------------------------------
 -- CATEGORIES
