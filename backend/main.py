@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import timedelta
 import json
+from uuid import uuid4
+import asyncpg
 
 from database import get_db_pool, close_db_pool
 from auth import verify_password, get_password_hash, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
@@ -158,9 +160,13 @@ async def checkout(customer_id: int, req: CheckoutRequest):
                 """
                 
                 try:
-                    res = await conn.fetchrow(query, customer_id, req.payment_method, "SIMULATED_TXN")
+                    # `payments.transaction_ref` is unique.  Each simulated payment
+                    # therefore needs its own gateway-style reference, including when
+                    # a cart is split into separate seller orders.
+                    transaction_ref = f"SIM-{uuid4().hex.upper()}"
+                    res = await conn.fetchrow(query, customer_id, req.payment_method, transaction_ref)
                     results.append(dict(res))
-                except asyncpg.exceptions.RaiseError as e:
+                except asyncpg.PostgresError as e:
                     raise HTTPException(status_code=400, detail=str(e))
                 
         return {"success": True, "orders": results}

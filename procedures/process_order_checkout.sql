@@ -71,16 +71,10 @@ BEGIN
     END IF;
 
 
-    -- --------------------------------------------------------
-    -- STEP 2: Validate cart is not empty
-    -- --------------------------------------------------------
     IF array_length(p_cart_items, 1) IS NULL THEN
         RAISE EXCEPTION 'Cart is empty. Cannot process checkout.';
     END IF;
 
-    -- --------------------------------------------------------
-    -- STEP 3: Validate each cart item & compute total
-    -- --------------------------------------------------------
     FOREACH v_item IN ARRAY p_cart_items LOOP
         IF v_item.quantity <= 0 THEN
             RAISE EXCEPTION 'Invalid quantity % for product_id=%.',
@@ -110,16 +104,10 @@ BEGIN
         v_total_amount := v_total_amount + (v_unit_price * v_item.quantity);
     END LOOP;
 
-    -- --------------------------------------------------------
-    -- STEP 4: Create the order
-    -- --------------------------------------------------------
     INSERT INTO orders (customer_id, seller_id, order_status, total_amount, shipping_addr)
     VALUES (p_customer_id, v_seller_id, 'created', v_total_amount, v_shipping_addr)
     RETURNING order_id INTO v_order_id;
 
-    -- --------------------------------------------------------
-    -- STEP 5: Insert order items (inventory trigger fires here)
-    -- --------------------------------------------------------
     FOREACH v_item IN ARRAY p_cart_items LOOP
         SELECT unit_price INTO v_unit_price
         FROM   products WHERE product_id = v_item.product_id;
@@ -128,22 +116,13 @@ BEGIN
         VALUES (v_order_id, v_item.product_id, v_item.quantity, v_unit_price);
     END LOOP;
 
-    -- --------------------------------------------------------
-    -- STEP 6: Record payment
-    -- --------------------------------------------------------
     INSERT INTO payments (order_id, payment_method, payment_status, amount, transaction_ref, paid_at)
     VALUES (v_order_id, p_payment_method::payment_method_enum, 'completed', v_total_amount, p_transaction_ref, NOW());
 
-    -- --------------------------------------------------------
-    -- STEP 7: Approve the order (audit trigger fires here)
-    -- --------------------------------------------------------
     UPDATE orders
     SET order_status = 'approved'
     WHERE order_id = v_order_id;
 
-    -- --------------------------------------------------------
-    -- STEP 8: Create shipment record
-    -- --------------------------------------------------------
 
     SELECT c.state_code INTO v_customer_state
     FROM   customers c WHERE c.customer_id = p_customer_id;
